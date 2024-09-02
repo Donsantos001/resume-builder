@@ -1,11 +1,13 @@
 // import "./App.css";
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import Register from "./pages/Auth/Register";
-import Profile from "./pages/Auth/Profile";
+import Profile from "./pages/Profile";
 import ProtectedPage from "./pages/Generic/ProtectedPage";
 import SharedLayout from "./pages/Generic/SharedLayout";
 import Login from "./pages/Auth/Login";
 import { SnackbarProvider } from "notistack";
+import Resume from "./pages/Resume";
+import CreateProfile from "./pages/CreateProfile";
 
 function App() {
   return (
@@ -31,7 +33,8 @@ function App() {
           }
         >
           <Route path="/" element={<Profile />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/createprofile" element={<CreateProfile />} />
+          <Route path="/resume" element={<Resume />} />
         </Route>
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />

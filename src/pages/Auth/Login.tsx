@@ -50,12 +50,12 @@ const Login = () => {
         email: user.email,
       })
     );
-    return navigate("/profile");
+    return navigate("/");
   };
 
   useEffect(() => {
     if(storedUser){
-      return navigate("/profile")
+      return navigate("/")
     }
   }, [storedUser]);
 
@@ -73,7 +73,7 @@ const Login = () => {
     <div className="wrapper">
       <div className="h-screen grid md:grid-cols-[minmax(350px,_1fr)_400px] lg:grid-cols-[minmax(450px,_1fr)_450px] grid-cols-1 py-3 pl-3">
         <aside
-          className={` bg-blue-700 rounded-tr-3xl rounded-bl-3xl h-full hidden md:block`}
+          className={` bg-blue-900 rounded-tr-3xl rounded-bl-3xl h-full hidden md:block`}
         >
           <div className="h-full relative flex flex-col justify-between p-8">
             <div className="app-logo">

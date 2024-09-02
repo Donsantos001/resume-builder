@@ -9,7 +9,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 const SlickButton: FC<ButtonProps> = ({ title, showIcon, icon, ...rest }) => {
   return (
     <button
-      className="outline-none cursor-pointer bg-blue-700 hover:bg-blue-800 text-white rounded-lg border-none px-5 py-3"
+      className="outline-none cursor-pointer bg-blue-900 hover:bg-blue-800 text-white rounded-lg border-none px-5 py-3"
       {...rest}
     >
       {showIcon && icon}

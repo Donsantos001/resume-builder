@@ -3,12 +3,14 @@ import { addUserToLocalStorage, getUserFromLocalStorage, removeUserFromLocalStor
 
 interface initialStateType {
   user: User | null,
-  name: string
+  name: string,
+  navOpen: boolean
 }
 
 const initialState: initialStateType= {
   user: getUserFromLocalStorage(),
   name: "",
+  navOpen: false
 };
 
 export const userSlice = createSlice({
@@ -28,9 +30,16 @@ export const userSlice = createSlice({
       state.user = null;
       removeUserFromLocalStorage();
     },
+
+    toggleNav: (state) => {
+      state.navOpen = !state.navOpen;
+    },
+    closeNav: (state) => {
+      state.navOpen = false;
+    }
   },
 });
 
-export const {changeTheme, authUser, logOut} = userSlice.actions;
+export const {changeTheme, authUser, logOut, toggleNav, closeNav} = userSlice.actions;
 
 export default userSlice.reducer;

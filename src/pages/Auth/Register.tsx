@@ -57,13 +57,13 @@ const SignUp = () => {
       })
     );
 
-    return navigate("/profile");
+    return navigate("/");
   };
 
   useEffect(() => {
     console.log(storedUser);
     if (storedUser) {
-      return navigate("/profile");
+      return navigate("/");
     }
   }, [storedUser]);
 
@@ -80,7 +80,7 @@ const SignUp = () => {
   return (
     <div className="wrapper">
       <div className="h-screen grid xl:grid-cols-[450px_minmax(450px,_1fr)] md:grid-cols-[350px_minmax(450px,_1fr)] grid-cols-1 py-3 pl-3">
-        <aside className="bg-blue-700 rounded-xl h-full hidden md:block">
+        <aside className="bg-blue-900 rounded-xl h-full hidden md:block">
           <div className="h-full flex flex-col justify-between p-8">
             <div className="app-logo">
               <div className="w-full">
