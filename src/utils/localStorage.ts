@@ -1,6 +1,7 @@
 export interface User {
     emailAddress: string;
-    fullName: string;
+    firstname: string;
+    lastname: string;
   }
   
   export const addUserToLocalStorage = (user: User) => {

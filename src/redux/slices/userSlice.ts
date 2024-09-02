@@ -1,13 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { addUserToLocalStorage, removeUserFromLocalStorage, User } from "../../utils/localStorage";
+import { addUserToLocalStorage, getUserFromLocalStorage, removeUserFromLocalStorage, User } from "../../utils/localStorage";
 
 interface initialStateType {
-  user?: User,
+  user: User | null,
   name: string
 }
 
-const initialState = {
-  user: null,
+const initialState: initialStateType= {
+  user: getUserFromLocalStorage(),
   name: "",
 };
 
@@ -29,8 +29,8 @@ export const userSlice = createSlice({
       removeUserFromLocalStorage();
     },
   },
-
-  
 });
+
+export const {changeTheme, authUser, logOut} = userSlice.actions;
 
 export default userSlice.reducer;
