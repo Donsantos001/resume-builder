@@ -7,13 +7,15 @@ interface initialStateType {
   name: string,
   navOpen: boolean,
   profiles: UserProfile[],
+  template: number,
 }
 
 const initialState: initialStateType= {
   user: getUserFromLocalStorage(),
   name: "",
   navOpen: false,
-  profiles: getProfilesFromLocalStorage()
+  profiles: getProfilesFromLocalStorage(),
+  template: 0,
 };
 
 export const userSlice = createSlice({
@@ -42,16 +44,21 @@ export const userSlice = createSlice({
     // profile
     addProfile: (state, { payload }) => {
       state.profiles.push(payload);
-      addProfilesToLocalStorage([...state.profiles,payload]);
+      addProfilesToLocalStorage([...state.profiles]);
     },
 
     removeProfiles: (state) => {
       state.profiles = [];
       removeProfilesFromLocalStorage();
+    },
+
+    // template
+    selectTemplate: (state, {payload}) => {
+      state.template = payload
     }
   },
 });
 
-export const {authUser, logOut, toggleNav, closeNav,addProfile, removeProfiles} = userSlice.actions;
+export const {authUser, logOut, toggleNav, closeNav,addProfile, removeProfiles, selectTemplate} = userSlice.actions;
 
 export default userSlice.reducer;

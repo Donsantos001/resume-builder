@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import Logo from "../../asset/imgs/res-builder.png";
+import Logo from "../../asset/imgs/logo.png";
 import useClickOutside from "../../hooks/useClickOutside";
 import { useAppDispatch } from "../../redux/hooks";
 import { closeNav, logOut } from "../../redux/slices/userSlice";
@@ -21,12 +21,14 @@ const SideMenu = ({ open }: { open: boolean }) => {
     >
       <div className="flex flex-col h-full w-full justify-between p-2">
         <div className="">
-          <div className={`${open ? "p-2" : "p-2 md:py-2"}`}>
+          <div className={`flex items-center ${open ? "p-2" : "p-2 md:py-2"}`}>
             <img
               className="h-16 object-contain"
               src={Logo}
               alt="Career Kit Logo"
             />
+
+            <h3 className="text-3xl font-bold text-white">CareerKit</h3>
           </div>
 
           <div className="mt-2 flex flex-col gap-1">
@@ -36,7 +38,7 @@ const SideMenu = ({ open }: { open: boolean }) => {
             >
               <div className="grid grid-cols-[50px,_minmax(200px,_1fr)]">
                 <div className="flex items-center justify-center mr-2">
-                  <div className={`fa fa-book`}></div>
+                  <div className={`fa fa-user-circle`}></div>
                 </div>
 
                 <div>Profiles</div>
@@ -48,7 +50,7 @@ const SideMenu = ({ open }: { open: boolean }) => {
             >
               <div className="grid grid-cols-[50px,_minmax(200px,_1fr)]">
                 <div className="flex items-center justify-center mr-2">
-                  <div className={`fa fa-book`}></div>
+                  <div className={`fa fa-plus-square`}></div>
                 </div>
 
                 <div>Create Profile</div>
@@ -60,10 +62,10 @@ const SideMenu = ({ open }: { open: boolean }) => {
             >
               <div className="grid grid-cols-[50px,_minmax(200px,_1fr)]">
                 <div className="flex items-center justify-center mr-2">
-                  <div className={`fa fa-book`}></div>
+                  <div className={`fa fa-file-alt`}></div>
                 </div>
 
-                <div>Resume/CV</div>
+                <div>Templates</div>
               </div>
             </a>
           </div>
@@ -78,7 +80,7 @@ const SideMenu = ({ open }: { open: boolean }) => {
           >
             <div className="grid grid-cols-[50px,_minmax(200px,_1fr)]">
               <div className="flex items-center justify-center mr-2">
-                <div className={`fa fa-book`}></div>
+                <div className={`fa fa-sign-out-alt`}></div>
               </div>
 
               <div>Logout</div>

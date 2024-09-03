@@ -4,8 +4,8 @@ import { toggleNav } from "../../redux/slices/userSlice";
 const TopNav = ({ open }: { open: boolean }) => {
   const dispatch = useAppDispatch();
   return (
-    <div className="px-4 py-2 h-[50px] flex items-center justify-between">
-      <h3 className="text-3xl font-bold text-gray-800">CareerKit</h3>
+    <div className="px-6 py-2 h-[50px] flex items-center justify-end">
+      {/* <h3 className="text-3xl font-bold text-gray-800">CareerKit</h3> */}
 
       <button
         onClick={() => {
@@ -13,7 +13,7 @@ const TopNav = ({ open }: { open: boolean }) => {
         }}
         className="text-2xl lg:hidden"
       >
-        <div className="fa fa-book"></div>
+        <div className="fa fa-bars"></div>
       </button>
     </div>
   );

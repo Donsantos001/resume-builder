@@ -3,6 +3,7 @@ import { UserProfile } from "../../pages/CreateProfile";
 import SlickButton from "../SlickButton";
 import DefaultTemplate from "../Template/DefaultTemplate";
 import { useReactToPrint } from "react-to-print";
+import useClickOutside from "../../hooks/useClickOutside";
 
 const ProfilePreviewModal = ({
   close,
@@ -18,9 +19,12 @@ const ProfilePreviewModal = ({
   data?: UserProfile;
 }) => {
   const previewRef = useRef<any>(null);
+  const modalRef = useRef<any>(null);
   const handlePrint = useReactToPrint({
     content: () => previewRef.current,
   });
+
+  useClickOutside(modalRef, () => close());
 
   useEffect(() => {
     if (print && previewRef.current) {
@@ -35,7 +39,7 @@ const ProfilePreviewModal = ({
         open ? " " : "hidden "
       }fixed left-0 top-0 z-50 w-screen h-screen bg-[#00000044] px-5 py-6 overflow-y-auto`}
     >
-      <div className="w-full max-w-[1024px] mx-auto">
+      <div ref={modalRef} className="w-full max-w-[1024px] mx-auto">
         <div className="flex justify-between items-center gap-2 mb-2">
           <button
             onClick={close}

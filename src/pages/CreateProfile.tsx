@@ -31,17 +31,19 @@ export interface UserProfile {
   date?: Date;
 }
 
+const initialProfile = {
+  user: userInitialState,
+  educations: [educationInitialState],
+  skills: [skillInitialState],
+  projects: [projectInitialState],
+  socials: [socialInitialState],
+};
+
 const CreateProfile = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
-  const [profile, setProfile] = useState<UserProfile>({
-    user: userInitialState,
-    educations: [educationInitialState],
-    skills: [skillInitialState],
-    projects: [projectInitialState],
-    socials: [socialInitialState],
-  });
+  const [profile, setProfile] = useState<UserProfile>(initialProfile);
 
   const setData = (
     name: keyof UserProfile,

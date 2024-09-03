@@ -61,7 +61,8 @@ const Profile = () => {
               onClick={() => {
                 navigate("/createprofile");
               }}
-              icon={<div className="fa fa-add"></div>}
+              showIcon={true}
+              icon={<div className="fa fa-plus"></div>}
               title="Add Profile"
             />
           </div>

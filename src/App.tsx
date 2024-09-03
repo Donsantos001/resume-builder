@@ -6,7 +6,7 @@ import ProtectedPage from "./pages/Generic/ProtectedPage";
 import SharedLayout from "./pages/Generic/SharedLayout";
 import Login from "./pages/Auth/Login";
 import { SnackbarProvider } from "notistack";
-import Resume from "./pages/Resume";
+import ResumeTemplate from "./pages/ResumeTemplate";
 import CreateProfile from "./pages/CreateProfile";
 
 function App() {
@@ -34,7 +34,7 @@ function App() {
         >
           <Route path="/" element={<Profile />} />
           <Route path="/createprofile" element={<CreateProfile />} />
-          <Route path="/resume" element={<Resume />} />
+          <Route path="/resume" element={<ResumeTemplate />} />
         </Route>
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
