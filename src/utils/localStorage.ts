@@ -28,3 +28,12 @@ export interface User {
     return profileData ? JSON.parse(profileData) : [];
   };
   
+
+  export const setTemplate = (temp: number) => {
+    localStorage.setItem("template", temp+"");
+  }
+
+  export const getTemplate = () => {
+    const template = localStorage.getItem("template");
+    return template ? parseInt(template) : 0;
+  }

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addProfilesToLocalStorage, addUserToLocalStorage, getProfilesFromLocalStorage, getUserFromLocalStorage, removeProfilesFromLocalStorage, removeUserFromLocalStorage, User } from "../../utils/localStorage";
+import { addProfilesToLocalStorage, addUserToLocalStorage, getProfilesFromLocalStorage, getTemplate, getUserFromLocalStorage, removeProfilesFromLocalStorage, removeUserFromLocalStorage, setTemplate, User } from "../../utils/localStorage";
 import { UserProfile } from "../../pages/CreateProfile";
 
 interface initialStateType {
@@ -15,7 +15,7 @@ const initialState: initialStateType= {
   name: "",
   navOpen: false,
   profiles: getProfilesFromLocalStorage(),
-  template: 0,
+  template: getTemplate(),
 };
 
 export const userSlice = createSlice({
@@ -55,6 +55,7 @@ export const userSlice = createSlice({
     // template
     selectTemplate: (state, {payload}) => {
       state.template = payload
+      setTemplate(payload)
     }
   },
 });

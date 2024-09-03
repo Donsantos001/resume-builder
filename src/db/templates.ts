@@ -1,5 +1,6 @@
 import DefaultTemplate from "../components/Template/DefaultTemplate"
 import TemplateImage from "../asset/imgs/template1.png";
+import BasicTemplate from "../components/Template/BasicTemplate";
 
 export const templates = [
     {
@@ -8,9 +9,9 @@ export const templates = [
         component: DefaultTemplate,
     },
     {
-        name: "Test 1",
+        name: "Basic",
         image: TemplateImage,
-        component: DefaultTemplate,
+        component: BasicTemplate,
     },
     {
         name: "Test 2",

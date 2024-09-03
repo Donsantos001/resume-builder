@@ -1,9 +1,11 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { UserProfile } from "../../pages/CreateProfile";
 import SlickButton from "../SlickButton";
 import DefaultTemplate from "../Template/DefaultTemplate";
 import { useReactToPrint } from "react-to-print";
 import useClickOutside from "../../hooks/useClickOutside";
+import { useAppSelector } from "../../redux/hooks";
+import { templates } from "../../db/templates";
 
 const ProfilePreviewModal = ({
   close,
@@ -18,6 +20,7 @@ const ProfilePreviewModal = ({
   setPrint?: any;
   data?: UserProfile;
 }) => {
+  const { template } = useAppSelector((store) => store.user);
   const previewRef = useRef<any>(null);
   const modalRef = useRef<any>(null);
   const handlePrint = useReactToPrint({
@@ -32,6 +35,10 @@ const ProfilePreviewModal = ({
       setPrint(false);
     }
   }, [print, previewRef.current]);
+
+  const Template = useMemo(() => {
+    return templates[template].component;
+  }, [template]);
 
   return profile ? (
     <div
@@ -55,7 +62,7 @@ const ProfilePreviewModal = ({
         </div>
 
         <div ref={previewRef} className="p-4 bg-white">
-          <DefaultTemplate profile={profile} />
+          <Template profile={profile} />
         </div>
       </div>
     </div>

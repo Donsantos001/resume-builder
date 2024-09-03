@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import GoogleButton from "../../components/GoogleButton";
 import SlickButton from "../../components/SlickButton";
 import FormInput from "../../components/FormInput";
-import Logo from "../../asset/imgs/res-builder.png";
+import Logo from "../../asset/imgs/logo.png";
 import LogoBlue from "../../asset/imgs/res-builder.png";
 import { reviews } from "../../db/reviews";
 import { useNavigate } from "react-router-dom";
