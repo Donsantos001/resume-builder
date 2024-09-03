@@ -5,7 +5,7 @@ const TopNav = ({ open }: { open: boolean }) => {
   const dispatch = useAppDispatch();
   return (
     <div className="px-4 py-2 h-[50px] flex items-center justify-between">
-      <h3 className="text-3xl font-bold text-gray-800">Career Kit</h3>
+      <h3 className="text-3xl font-bold text-gray-800">CareerKit</h3>
 
       <button
         onClick={() => {

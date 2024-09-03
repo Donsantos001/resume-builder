@@ -1,3 +1,5 @@
+import { UserProfile } from "../pages/CreateProfile";
+
 export interface User {
     emailAddress: string;
     firstname: string;
@@ -13,5 +15,16 @@ export interface User {
   export const getUserFromLocalStorage = () => {
     const userData = localStorage.getItem('user');
     return userData ? JSON.parse(userData) : null;
+  };
+
+  export const addProfilesToLocalStorage = (profiles: UserProfile[]) => {
+    localStorage.setItem('profiles', JSON.stringify(profiles));
+  };
+  export const removeProfilesFromLocalStorage = () => {
+    localStorage.removeItem('profiles');
+  };
+  export const getProfilesFromLocalStorage = () => {
+    const profileData = localStorage.getItem('profiles');
+    return profileData ? JSON.parse(profileData) : [];
   };
   

@@ -6,10 +6,15 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   showIcon?: boolean;
 }
 
-const SlickButton: FC<ButtonProps> = ({ title, showIcon, icon, ...rest }) => {
+const SlickLightButton: FC<ButtonProps> = ({
+  title,
+  showIcon,
+  icon,
+  ...rest
+}) => {
   return (
     <button
-      className="outline-none cursor-pointer bg-blue-900 hover:bg-blue-800 text-white rounded-lg border-none px-5 py-3"
+      className="outline-none cursor-pointer text-blue-900 hover:bg-gray-300 bg-gray-200 rounded-lg border-none px-5 py-3"
       {...rest}
     >
       {showIcon && icon}
@@ -18,4 +23,4 @@ const SlickButton: FC<ButtonProps> = ({ title, showIcon, icon, ...rest }) => {
   );
 };
 
-export default SlickButton;
+export default SlickLightButton;

@@ -1,26 +1,26 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { addUserToLocalStorage, getUserFromLocalStorage, removeUserFromLocalStorage, User } from "../../utils/localStorage";
+import { createSlice } from "@reduxjs/toolkit";
+import { addProfilesToLocalStorage, addUserToLocalStorage, getProfilesFromLocalStorage, getUserFromLocalStorage, removeProfilesFromLocalStorage, removeUserFromLocalStorage, User } from "../../utils/localStorage";
+import { UserProfile } from "../../pages/CreateProfile";
 
 interface initialStateType {
   user: User | null,
   name: string,
-  navOpen: boolean
+  navOpen: boolean,
+  profiles: UserProfile[],
 }
 
 const initialState: initialStateType= {
   user: getUserFromLocalStorage(),
   name: "",
-  navOpen: false
+  navOpen: false,
+  profiles: getProfilesFromLocalStorage()
 };
 
 export const userSlice = createSlice({
   name: "user",
   initialState: initialState,
   reducers: {
-    changeTheme: (state, action: PayloadAction<string>) => {
-      state.name = action.payload;
-    },
-
+    // auth
     authUser: (state, { payload }) => {
       state.user = payload;
       addUserToLocalStorage(payload);
@@ -31,15 +31,27 @@ export const userSlice = createSlice({
       removeUserFromLocalStorage();
     },
 
+    // nav
     toggleNav: (state) => {
       state.navOpen = !state.navOpen;
     },
     closeNav: (state) => {
       state.navOpen = false;
+    },
+
+    // profile
+    addProfile: (state, { payload }) => {
+      state.profiles.push(payload);
+      addProfilesToLocalStorage([...state.profiles,payload]);
+    },
+
+    removeProfiles: (state) => {
+      state.profiles = [];
+      removeProfilesFromLocalStorage();
     }
   },
 });
 
-export const {changeTheme, authUser, logOut, toggleNav, closeNav} = userSlice.actions;
+export const {authUser, logOut, toggleNav, closeNav,addProfile, removeProfiles} = userSlice.actions;
 
 export default userSlice.reducer;

@@ -15,7 +15,7 @@ const SideMenu = ({ open }: { open: boolean }) => {
   return (
     <div
       ref={menuRef}
-      className={`fixed h-screen w-[280px] bg-blue-900 transition-all lg:translate-x-0 ${
+      className={`fixed h-screen z-40 w-[280px] bg-blue-900 transition-all lg:translate-x-0 ${
         open ? "translate-x-0" : "-translate-x-full"
       }`}
     >
