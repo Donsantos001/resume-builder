@@ -1,14 +1,16 @@
 import { UserProfile } from "../../pages/CreateProfile";
 import Image from "../../asset/imgs/res-builder.png";
+import ImageWithFallback from "../ImageWithFallback";
 
 const DefaultTemplate = ({ profile }: { profile: UserProfile }) => {
   return (
     <div className="grid grid-cols-[30%,_70%] gap-3">
       <div className="flex flex-col">
         <div className="w-full p-4">
-          <img
-            src={profile.user.image || Image}
-            alt="profile picture"
+          <ImageWithFallback
+            alt={"Profile picture"}
+            primaryUrl={profile.user.image}
+            fallbackUrl={Image}
             className="w-full h-full object-cover"
           />
         </div>
@@ -41,11 +43,11 @@ const DefaultTemplate = ({ profile }: { profile: UserProfile }) => {
         )}
 
         <div className="education mb-4">
-          <h3 className="text-2xl">Education</h3>
+          <h3 className="text-2xl pb-4">Education</h3>
           <hr />
 
           {profile.educations.map((education, index) => (
-            <div key={index} className="mt-3">
+            <div key={index} className="pt-2">
               <p className="text-xl">{education.college}</p>
               <p className="text-sm">{education.location}</p>
               <p className="">
@@ -63,11 +65,11 @@ const DefaultTemplate = ({ profile }: { profile: UserProfile }) => {
         </div>
 
         <div className="projects mb-4">
-          <h3 className="text-2xl">Projects/Experience</h3>
+          <h3 className="text-2xl pb-4">Projects/Experience</h3>
           <hr />
 
           {profile.projects.map((project, index) => (
-            <div key={index} className="mt-3">
+            <div key={index} className="pt-2">
               <p className="text-xl">{project.name}</p>
               <p className="">
                 Stacks: <span>{project.stack}</span>
@@ -83,11 +85,11 @@ const DefaultTemplate = ({ profile }: { profile: UserProfile }) => {
           ))}
         </div>
         <div className="socials mb-4">
-          <h3 className="text-2xl">Socials</h3>
+          <h3 className="text-2xl pb-4">Socials</h3>
           <hr />
 
           {profile.socials.map((social, index) => (
-            <div key={index} className="mt-3 flex items-center gap-2">
+            <div key={index} className="pt-2 flex items-center gap-2">
               <div className="fa fa-link text-sm"></div>
 
               <a href={social.link} className="text-blue-800">

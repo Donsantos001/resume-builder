@@ -1,5 +1,6 @@
 import { UserProfile } from "../../pages/CreateProfile";
 import Image from "../../asset/imgs/res-builder.png";
+import ImageWithFallback from "../ImageWithFallback";
 
 const BasicTemplate = ({ profile }: { profile: UserProfile }) => {
   return (
@@ -13,14 +14,15 @@ const BasicTemplate = ({ profile }: { profile: UserProfile }) => {
             {profile.user.lastname}
           </h2>
 
-          <p>Address: {profile.user.address}</p>
+          <p className="pt-1">Address: {profile.user.address}</p>
           <p>Phone Number: {profile.user.phoneno}</p>
         </div>
 
         <div className="h-[160px]">
-          <img
-            src={profile.user.image || Image}
-            alt="profile picture"
+          <ImageWithFallback
+            alt={"Profile picture"}
+            primaryUrl={profile.user.image}
+            fallbackUrl={Image}
             className="w-full h-full object-cover"
           />
         </div>

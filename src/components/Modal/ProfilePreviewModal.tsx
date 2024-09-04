@@ -1,10 +1,12 @@
 import { useEffect, useMemo, useRef } from "react";
 import { UserProfile } from "../../pages/CreateProfile";
 import SlickButton from "../SlickButton";
+import { jsPDF } from "jspdf";
 import { useReactToPrint } from "react-to-print";
 import useClickOutside from "../../hooks/useClickOutside";
 import { useAppSelector } from "../../redux/hooks";
 import { templates } from "../../db/templates";
+import html2canvas from "html2canvas";
 
 const ProfilePreviewModal = ({
   close,
@@ -22,6 +24,25 @@ const ProfilePreviewModal = ({
   const { template } = useAppSelector((store) => store.user);
   const previewRef = useRef<any>(null);
   const modalRef = useRef<any>(null);
+
+  const handleDownload = () => {
+    const elem = document.getElementById("preview");
+    elem &&
+      html2canvas(elem).then((canvas) => {
+        const imgData = canvas.toDataURL("image/png");
+        const pdf = new jsPDF();
+        const imgProps = pdf.getImageProperties(imgData);
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+        pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+        pdf.save(
+          `${profile?.user.firstname || ""}-${
+            profile?.user.lastname || ""
+          }-Resume.pdf`
+        );
+      });
+  };
+
   const handlePrint = useReactToPrint({
     content: () => previewRef.current,
   });
@@ -30,7 +51,7 @@ const ProfilePreviewModal = ({
 
   useEffect(() => {
     if (print && previewRef.current) {
-      handlePrint();
+      handleDownload();
       setPrint && setPrint(false);
     }
   }, [print, previewRef.current]);
@@ -42,7 +63,7 @@ const ProfilePreviewModal = ({
   return profile ? (
     <div
       className={`${
-        open ? " " : "hidden "
+        open ? " " : "opacity-0 -z-10 "
       }fixed left-0 top-0 z-50 w-screen h-screen bg-[#00000044] px-5 py-6 overflow-y-auto`}
     >
       <div ref={modalRef} className="w-full max-w-[1024px] mx-auto">
@@ -53,14 +74,23 @@ const ProfilePreviewModal = ({
           >
             <div className="fa fa-times"></div>
           </button>
-          <SlickButton
-            onClick={handlePrint}
-            icon={<div className="fa fa-download"></div>}
-            title="Download"
-          />
+
+          <div className="flex items-center gap-2">
+            <button
+              onClick={handlePrint}
+              className="text-blue-800 text-xl px-5 py-3 bg-white rounded-lg flex items-center hover:bg-gray-100 transition-all justify-center"
+            >
+              <div className="fa fa-print"></div>
+            </button>
+            <SlickButton
+              onClick={handleDownload}
+              icon={<div className="fa fa-download"></div>}
+              title="Download"
+            />
+          </div>
         </div>
 
-        <div ref={previewRef} className="p-4 bg-white">
+        <div ref={previewRef} id="preview" className="p-4 bg-white">
           <Template profile={profile} />
         </div>
       </div>

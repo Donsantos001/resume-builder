@@ -49,7 +49,7 @@ const ResumeTemplate = () => {
                 </div>
               </div>
 
-              <p>{template.name}</p>
+              <p className={`py-2 font-medium text-lg ${index === selected ? "text-blue-800": ""}`}>{template.name}</p>
             </div>
           ))}
         </div>

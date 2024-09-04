@@ -6,7 +6,7 @@ import Logo from "../../asset/imgs/logo.png";
 import LogoBlue from "../../asset/imgs/res-builder.png";
 import DesktopImage from "../../asset/imgs/logo.png";
 import { reviews } from "../../db/reviews";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { authUser } from "../../redux/slices/userSlice";
 import { enqueueSnackbar } from "notistack";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
@@ -81,8 +81,9 @@ const Login = () => {
         >
           <div className="h-full relative flex flex-col justify-between p-8">
             <div className="app-logo">
-              <div className="w-full">
+              <div className="w-full flex items-center">
                 <img src={Logo} className="h-28 w-fit object-contain" alt="" />
+                <h3 className="text-2xl font-bold text-white">CareerKit</h3>
               </div>
             </div>
 
@@ -160,8 +161,9 @@ const Login = () => {
         </aside>
 
         <main className="px-4 sm:px-8 py-6 md:p-10 md:overflow-y-auto">
-          <div className="w-full block md:hidden">
+          <div className="w-full md:hidden flex items-center">
             <img src={LogoBlue} className="h-28 w-fit object-contain" alt="" />
+            <h3 className="text-2xl font-bold">CareerKit</h3>
           </div>
 
           <form action="" method="post" className="md:p-5 p-4">
@@ -169,9 +171,9 @@ const Login = () => {
               <h3 className="text-2xl font-bold mb-2">Login</h3>
               <p>
                 New here?{" "}
-                <a className="text-blue-600" href="/register">
+                <Link className="text-blue-600" to="/register">
                   Register
-                </a>
+                </Link>
               </p>
             </div>
 

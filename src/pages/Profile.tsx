@@ -31,7 +31,9 @@ const Profile = () => {
             <div className="absolute left-full top-[50%] translate-x-2 -translate-y-1/2">
               <button
                 onClick={() => {
-                  dispatch(removeProfile(index));
+                  if (window.confirm("This item will be deleted")) {
+                    dispatch(removeProfile(index));
+                  }
                 }}
                 className=""
               >

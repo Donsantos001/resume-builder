@@ -88,8 +88,9 @@ const SignUp = () => {
         <aside className="bg-blue-900 rounded-xl h-full hidden md:block">
           <div className="h-full flex flex-col justify-between p-8">
             <div className="app-logo">
-              <div className="w-full">
+              <div className="w-full flex items-center">
                 <img src={Logo} className="h-28 w-fit object-contain" alt="" />
+                <h3 className="text-2xl font-bold text-white">CareerKit</h3>
               </div>
             </div>
 
@@ -151,8 +152,9 @@ const SignUp = () => {
         </aside>
 
         <main className="px-4 sm:px-8 py-6 md:p-10 md:overflow-y-auto">
-          <div className="w-full block md:hidden">
+          <div className="w-full flex items-center md:hidden">
             <img src={LogoBlue} className="h-28 w-fit object-contain" alt="" />
+            <h3 className="text-2xl font-bold">CareerKit</h3>
           </div>
 
           <form action="" method="post" className="md:p-5 p-4">
