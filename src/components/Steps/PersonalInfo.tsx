@@ -2,6 +2,7 @@ import React from "react";
 import FormInput from "../FormInput";
 import FormTextArea from "../FormTextArea";
 import SlickLabel from "../SlickLabel";
+import ImageWithFallback from "../ImageWithFallback";
 
 export type UserType = {
   firstname: string;
@@ -25,14 +26,13 @@ export const userInitialState = {
 
 const PersonalInfo = ({
   data: user,
-  showValid = false, 
+  showValid = false,
   setData,
 }: {
   data: UserType;
   showValid?: boolean;
   setData: any;
 }) => {
-
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -47,8 +47,9 @@ const PersonalInfo = ({
       <div className="md:p-5 p-4">
         <div className="mb-2">
           <div className="w-[200px] h-[200px] rounded-xl overflow-hidden relative">
-            <img
-              src={user.image || "https://placeholder.co/200"}
+            <ImageWithFallback
+              primaryUrl={user.image}
+              fallbackUrl={"https://placeholder.co/200"}
               className="w-full h-full object-cover"
               alt=""
             />
