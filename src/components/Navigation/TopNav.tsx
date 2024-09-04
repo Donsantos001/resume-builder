@@ -1,7 +1,7 @@
 import { useAppDispatch } from "../../redux/hooks";
 import { toggleNav } from "../../redux/slices/userSlice";
 
-const TopNav = ({ open }: { open: boolean }) => {
+const TopNav = () => {
   const dispatch = useAppDispatch();
   return (
     <div className="px-6 py-2 h-[50px] flex items-center justify-end">

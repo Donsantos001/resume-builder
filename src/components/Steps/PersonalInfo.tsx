@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import FormInput from "../FormInput";
 import FormTextArea from "../FormTextArea";
-import SlickButton from "../SlickButton";
 import SlickLabel from "../SlickLabel";
 
 export type UserType = {

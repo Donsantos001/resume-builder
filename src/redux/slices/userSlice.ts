@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addProfilesToLocalStorage, addUserToLocalStorage, getProfilesFromLocalStorage, getTemplate, getUserFromLocalStorage, removeProfilesFromLocalStorage, removeUserFromLocalStorage, setTemplate, User } from "../../utils/localStorage";
+import { addProfilesToLocalStorage, addUserToLocalStorage, getProfilesFromLocalStorage, getTemplate, getUserFromLocalStorage, removeUserFromLocalStorage, setTemplate, User } from "../../utils/localStorage";
 import { UserProfile } from "../../pages/CreateProfile";
 
 interface initialStateType {

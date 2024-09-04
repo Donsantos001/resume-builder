@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useRef } from "react";
 import { UserProfile } from "../../pages/CreateProfile";
 import SlickButton from "../SlickButton";
-import DefaultTemplate from "../Template/DefaultTemplate";
 import { useReactToPrint } from "react-to-print";
 import useClickOutside from "../../hooks/useClickOutside";
 import { useAppSelector } from "../../redux/hooks";

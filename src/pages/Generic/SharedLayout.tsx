@@ -9,7 +9,7 @@ const SharedLayout = ({ children }: { children: any }) => {
     <div>
       <SideMenu open={navOpen} />
       <div className="main-content lg:pl-[280px]">
-        <TopNav open={navOpen} />
+        <TopNav/>
         <div className="p-4">{children}</div>
       </div>
     </div>
