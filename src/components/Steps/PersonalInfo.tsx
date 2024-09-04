@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import FormInput from "../FormInput";
+import FormTextArea from "../FormTextArea";
 import SlickButton from "../SlickButton";
-import GoogleButton from "../GoogleButton";
+import SlickLabel from "../SlickLabel";
 
 export type UserType = {
   firstname: string;
@@ -9,6 +10,8 @@ export type UserType = {
   email: string;
   phoneno: string;
   address: string;
+  bio: string;
+  image?: string;
 };
 
 export const userInitialState = {
@@ -17,6 +20,8 @@ export const userInitialState = {
   email: "",
   phoneno: "",
   address: "",
+  bio: "",
+  image: "",
 };
 
 const PersonalInfo = ({
@@ -28,7 +33,9 @@ const PersonalInfo = ({
 }) => {
   const [showValid, setShowValid] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setData("user", {
       ...user,
       [e.target.name]: e.target.value,
@@ -37,8 +44,35 @@ const PersonalInfo = ({
 
   return (
     <div className="px-4 sm:px-8 py-0 md:px-10 md:py-2 md:overflow-y-auto">
-      <form action="" method="post" className="md:p-5 p-4">
+      <div className="md:p-5 p-4">
         <div className="mb-2">
+          <div className="w-[200px] h-[200px] rounded-xl overflow-hidden relative">
+            <img
+              src={user.image || "https://placeholder.co/200"}
+              className="w-full h-full object-cover"
+              alt=""
+            />
+            <input
+              id="image"
+              type="file"
+              accept="image/*"
+              onChange={(e) => {
+                setData("user", {
+                  ...user,
+                  image: e.target.files
+                    ? URL.createObjectURL(e.target.files[0])
+                    : "",
+                });
+              }}
+              className="hidden"
+            />
+            <div className="absolute transition-all opacity-0 hover:opacity-100 top-0 left-0 w-full h-full flex items-center justify-center bg-[#00000022]">
+              <label htmlFor="image" className="w-min">
+                <SlickLabel title="Choose" />
+              </label>
+            </div>
+          </div>
+
           <div className="input-con mb-4 flex flex-wrap justify-between gap-3">
             <div className="flex-1 mt-2">
               <label className="block mb-2 text-gray-500" htmlFor="category">
@@ -76,23 +110,6 @@ const PersonalInfo = ({
                   onChange={handleChange}
                 />
               </div>
-            </div>
-          </div>
-
-          <div className="input-con mb-4">
-            <label className="block mb-2 text-gray-500" htmlFor="category">
-              Address
-            </label>
-
-            <div className="flex flex-wrap justify-between gap-3">
-              <FormInput
-                className={showValid && !user.address ? "border-red-400" : ""}
-                name="address"
-                placeholder="8, Lockwoods New Orleans"
-                value={user.address}
-                type="address"
-                onChange={handleChange}
-              />
             </div>
           </div>
 
@@ -134,8 +151,44 @@ const PersonalInfo = ({
               </div>
             </div>
           </div>
+
+          <div className="input-con mb-4 flex flex-wrap justify-between gap-3">
+            <div className="flex-1 mt-2">
+              <label className="block mb-2 text-gray-500" htmlFor="category">
+                Address
+              </label>
+
+              <div className="flex flex-wrap justify-between gap-3">
+                <FormInput
+                  className={showValid && !user.address ? "border-red-400" : ""}
+                  name="address"
+                  placeholder="8, Lockwoods New Orleans"
+                  value={user.address}
+                  type="text"
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+
+            <div className="flex-1 mt-2">
+              <label className="block mb-2 text-gray-500" htmlFor="category">
+                Bio
+              </label>
+
+              <div className="flex flex-wrap justify-between gap-3">
+                <FormTextArea
+                  className={showValid && !user.bio ? "border-red-400" : ""}
+                  name="bio"
+                  placeholder="Experienced Software Developer with X years in React, Javascript,and Typescript. Passionate about integrating embedded systems with machine learning. Seeking to innovate and create impactful technology solutions"
+                  value={user.bio}
+                  type="text"
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+          </div>
         </div>
-      </form>
+      </div>
     </div>
   );
 };

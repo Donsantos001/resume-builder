@@ -32,7 +32,7 @@ const ProfilePreviewModal = ({
   useEffect(() => {
     if (print && previewRef.current) {
       handlePrint();
-      setPrint(false);
+      setPrint && setPrint(false);
     }
   }, [print, previewRef.current]);
 

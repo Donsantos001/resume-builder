@@ -15,7 +15,7 @@ const BasicTemplate = ({ profile }: { profile: UserProfile }) => {
 
         <div className="h-[160px]">
           <img
-            src={Image}
+            src={profile.user.image || Image}
             alt="profile picture"
             className="w-full h-full object-cover"
           />
@@ -51,6 +51,7 @@ const BasicTemplate = ({ profile }: { profile: UserProfile }) => {
               </div>
             ))}
           </div>
+          
         </div>
 
         <div className="w-[1px] bg-gray-300 h-full"></div>

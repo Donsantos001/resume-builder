@@ -34,7 +34,7 @@ function App() {
         >
           <Route path="/" element={<Profile />} />
           <Route path="/createprofile" element={<CreateProfile />} />
-          <Route path="/resume" element={<ResumeTemplate />} />
+          <Route path="/resumetemplates" element={<ResumeTemplate />} />
         </Route>
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />

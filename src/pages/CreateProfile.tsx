@@ -21,6 +21,8 @@ import SlickLightButton from "../components/SlickLightButton";
 import { useAppDispatch } from "../redux/hooks";
 import { addProfile } from "../redux/slices/userSlice";
 import { useNavigate } from "react-router-dom";
+import ProfilePreviewModal from "../components/Modal/ProfilePreviewModal";
+import { enqueueSnackbar } from "notistack";
 
 export interface UserProfile {
   user: UserType;
@@ -42,6 +44,7 @@ const initialProfile = {
 const CreateProfile = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const [openPreview, setOpenPreview] = useState(false);
   const [step, setStep] = useState(0);
   const [profile, setProfile] = useState<UserProfile>(initialProfile);
 
@@ -62,6 +65,10 @@ const CreateProfile = () => {
 
   const handleSave = () => {
     dispatch(addProfile({ ...profile, date: new Date() }));
+    enqueueSnackbar({
+      message: "Profile created",
+      variant: "success",
+    });
     navigate("/");
   };
 
@@ -92,7 +99,7 @@ const CreateProfile = () => {
 
   return (
     <div>
-      <div className="flex flex-row flex-wrap gap-2 justify-between items-center mb-3 px-8 sm:px-12 md:px-[60px]">
+      <div className="flex flex-row flex-wrap gap-2 justify-between items-center mb-3 px-6 sm:px-12 md:px-[60px]">
         <div className="text-2xl text-blue-900 min-w-[160px]">
           {stepPage[step].title}
         </div>
@@ -113,30 +120,52 @@ const CreateProfile = () => {
 
       {stepPage[step].page}
 
-      <div className="px-8 sm:px-12 md:px-[60px] flex gap-2">
-        {step > 0 && (
-          <SlickLightButton
+      <div className="flex justify-between flex-wrap gap-2 items-center px-6 sm:px-12 md:px-[60px] ">
+        <div className="flex gap-2">
+          {step > 0 && (
+            <SlickLightButton
+              onClick={() => {
+                if (step > 0) {
+                  setStep(step - 1);
+                }
+              }}
+              title="Prev"
+            />
+          )}
+          <SlickButton
             onClick={() => {
-              if (step > 0) {
-                setStep(step - 1);
+              if (step === stepPage.length - 1) {
+                handleSave();
+              }
+
+              if (step < stepPage.length - 1) {
+                setStep(step + 1);
               }
             }}
-            title="Prev"
+            title={`${step === stepPage.length - 1 ? "Save" : "Next"}`}
+          />
+        </div>
+
+        {step === stepPage.length - 1 && (
+          <SlickLightButton
+            onClick={() => {
+              setOpenPreview(true);
+            }}
+            showIcon={true}
+            icon={<div className="fa fa-eye"></div>}
+            title="Preview"
           />
         )}
-        <SlickButton
-          onClick={() => {
-            if (step === stepPage.length - 1) {
-              handleSave();
-            }
-
-            if (step < stepPage.length - 1) {
-              setStep(step + 1);
-            }
-          }}
-          title={`${step === stepPage.length - 1 ? "Save" : "Next"}`}
-        />
       </div>
+
+      <ProfilePreviewModal
+        open={openPreview}
+        print={false}
+        data={profile}
+        close={() => {
+          setOpenPreview(false);
+        }}
+      />
     </div>
   );
 };

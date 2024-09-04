@@ -50,6 +50,10 @@ const Login = () => {
         email: user.email,
       })
     );
+    enqueueSnackbar({
+      message: "Login successful",
+      variant: "success",
+    });
     return navigate("/");
   };
 
@@ -217,7 +221,16 @@ const Login = () => {
 
                 <p className="text-gray-400 m-2">or</p>
 
-                <GoogleButton type="button" title="Sign in with Google" />
+                <GoogleButton
+                  onClick={() => {
+                    enqueueSnackbar({
+                      message: "Feature is currently unavailable",
+                      variant: "info",
+                    });
+                  }}
+                  type="button"
+                  title="Sign in with Google"
+                />
               </div>
             </div>
           </form>

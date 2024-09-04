@@ -3,6 +3,7 @@ import Logo from "../../asset/imgs/logo.png";
 import useClickOutside from "../../hooks/useClickOutside";
 import { useAppDispatch } from "../../redux/hooks";
 import { closeNav, logOut } from "../../redux/slices/userSlice";
+import { Link } from "react-router-dom";
 
 const SideMenu = ({ open }: { open: boolean }) => {
   const menuRef = useRef<any>(null);
@@ -32,8 +33,8 @@ const SideMenu = ({ open }: { open: boolean }) => {
           </div>
 
           <div className="mt-2 flex flex-col gap-1">
-            <a
-              href={"/"}
+            <Link
+              to={"/"}
               className={`relative mt-2 overflow-hidden rounded-lg py-3 px-2 text-white hover:bg-white/20`}
             >
               <div className="grid grid-cols-[50px,_minmax(200px,_1fr)]">
@@ -43,9 +44,9 @@ const SideMenu = ({ open }: { open: boolean }) => {
 
                 <div>Profiles</div>
               </div>
-            </a>
-            <a
-              href={"/createprofile"}
+            </Link>
+            <Link
+              to={"/createprofile"}
               className={`relative mt-2 overflow-hidden rounded-lg py-3 px-2 text-white hover:bg-white/20`}
             >
               <div className="grid grid-cols-[50px,_minmax(200px,_1fr)]">
@@ -55,9 +56,9 @@ const SideMenu = ({ open }: { open: boolean }) => {
 
                 <div>Create Profile</div>
               </div>
-            </a>
-            <a
-              href={"/resume"}
+            </Link>
+            <Link
+              to={"/resumetemplates"}
               className={`relative mt-2 overflow-hidden rounded-lg py-3 px-2 text-white hover:bg-white/20`}
             >
               <div className="grid grid-cols-[50px,_minmax(200px,_1fr)]">
@@ -67,7 +68,7 @@ const SideMenu = ({ open }: { open: boolean }) => {
 
                 <div>Templates</div>
               </div>
-            </a>
+            </Link>
           </div>
         </div>
 

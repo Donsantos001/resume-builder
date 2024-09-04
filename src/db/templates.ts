@@ -12,21 +12,6 @@ export const templates = [
         name: "Basic",
         image: TemplateImage,
         component: BasicTemplate,
-    },
-    {
-        name: "Test 2",
-        image: TemplateImage,
-        component: DefaultTemplate,
-    },
-    {
-        name: "Test 3",
-        image: TemplateImage,
-        component: DefaultTemplate,
-    },
-    {
-        name: "Test 4",
-        image: TemplateImage,
-        component: DefaultTemplate,
-    },
+    }
     
 ]

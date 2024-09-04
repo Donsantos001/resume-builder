@@ -7,7 +7,7 @@ const DefaultTemplate = ({ profile }: { profile: UserProfile }) => {
       <div className="flex flex-col">
         <div className="w-full p-4">
           <img
-            src={Image}
+            src={profile.user.image || Image}
             alt="profile picture"
             className="w-full h-full object-cover"
           />
@@ -24,14 +24,18 @@ const DefaultTemplate = ({ profile }: { profile: UserProfile }) => {
         </div>
       </div>
 
-      <div className="flex flex-col">
+      <div className="flex flex-col px-2">
         <div className="personal mb-4">
-          <h2 className="text-3xl mb-4 pt-4">
+          <h2 className="text-4xl font-medium mb-4 pt-4">
             {profile.user.firstname} {profile.user.lastname}
           </h2>
 
           <p>Address: {profile.user.address}</p>
           <p>Phone Number: {profile.user.phoneno}</p>
+        </div>
+
+        <div className="bio mb-4">
+          <p className="">{profile.user.bio}</p>
         </div>
 
         <div className="education mb-4">

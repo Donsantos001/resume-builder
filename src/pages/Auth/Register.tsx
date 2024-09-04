@@ -57,6 +57,11 @@ const SignUp = () => {
       })
     );
 
+    enqueueSnackbar({
+      message: "Registeration successful",
+      variant: "success",
+    });
+
     return navigate("/");
   };
 
@@ -285,7 +290,12 @@ const SignUp = () => {
                 <GoogleButton
                   type="button"
                   title="Sign up with Google"
-                  onClick={() => {}}
+                  onClick={() => {
+                    enqueueSnackbar({
+                      message: "Feature is currently unavailable",
+                      variant: "info",
+                    });
+                  }}
                 />
               </div>
             </div>

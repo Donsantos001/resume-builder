@@ -1,3 +1,4 @@
+import { enqueueSnackbar } from "notistack";
 import SlickButton from "../components/SlickButton";
 import { templates } from "../db/templates";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
@@ -8,13 +9,13 @@ const ResumeTemplate = () => {
 
   return (
     <div>
-      <div className="flex flex-row flex-wrap gap-2 justify-between items-center mb-3 px-8 sm:px-12 md:px-[60px]">
+      <div className="flex flex-row flex-wrap gap-2 justify-between items-center mb-3 px-6 sm:px-12 md:px-[60px]">
         <div className="text-2xl text-blue-900 min-w-[160px]">
           <p>Resume Templates</p>
         </div>
       </div>
 
-      <div className="px-8 sm:px-12 md:px-[60px]">
+      <div className="px-6 sm:px-12 md:px-[60px]">
         <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {templates.map((template, index) => (
             <div>
@@ -39,6 +40,10 @@ const ResumeTemplate = () => {
                     title="Use"
                     onClick={() => {
                       dispatch(selectTemplate(index));
+                      enqueueSnackbar({
+                        message: `You are now using ${templates[index].name}`,
+                        variant: "success",
+                      });
                     }}
                   />
                 </div>

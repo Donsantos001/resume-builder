@@ -47,9 +47,9 @@ export const userSlice = createSlice({
       addProfilesToLocalStorage([...state.profiles]);
     },
 
-    removeProfiles: (state) => {
-      state.profiles = [];
-      removeProfilesFromLocalStorage();
+    removeProfile: (state, {payload}) => {
+      state.profiles = [...state.profiles.slice(0, payload), ...state.profiles.slice(payload+1)];
+      addProfilesToLocalStorage(state.profiles);
     },
 
     // template
@@ -60,6 +60,6 @@ export const userSlice = createSlice({
   },
 });
 
-export const {authUser, logOut, toggleNav, closeNav,addProfile, removeProfiles, selectTemplate} = userSlice.actions;
+export const {authUser, logOut, toggleNav, closeNav,addProfile, removeProfile, selectTemplate} = userSlice.actions;
 
 export default userSlice.reducer;
