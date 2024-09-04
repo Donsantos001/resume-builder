@@ -1,4 +1,4 @@
-import  { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import PersonalInfo, {
   userInitialState,
   UserType,
@@ -20,7 +20,7 @@ import SlickButton from "../components/SlickButton";
 import SlickLightButton from "../components/SlickLightButton";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { addProfile } from "../redux/slices/userSlice";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import ProfilePreviewModal from "../components/Modal/ProfilePreviewModal";
 import { enqueueSnackbar } from "notistack";
 
@@ -44,6 +44,7 @@ const initialProfile = {
 const CreateProfile = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const { state } = useLocation();
   const { user } = useAppSelector((store) => store.user);
   const [showValid, setShowValid] = useState(false);
   const [openPreview, setOpenPreview] = useState(false);
@@ -51,6 +52,13 @@ const CreateProfile = () => {
   const [profile, setProfile] = useState<UserProfile>(initialProfile);
 
   useEffect(() => {
+    if (state && state.profile) {
+      setProfile(state.profile);
+    }
+  }, [state]);
+
+  useEffect(() => {
+    if (state?.profile) return;
     if (user) {
       setProfile({
         ...profile,

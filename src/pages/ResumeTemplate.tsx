@@ -18,7 +18,7 @@ const ResumeTemplate = () => {
       <div className="px-6 sm:px-12 md:px-[60px]">
         <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {templates.map((template, index) => (
-            <div>
+            <div key={index}>
               <div
                 key={index}
                 className={`border relative rounded-md shadow ${

@@ -57,6 +57,14 @@ const Profile = () => {
               <div className="flex gap-4">
                 <button
                   onClick={() => {
+                    navigate("/createprofile", { state: { profile } });
+                  }}
+                >
+                  <div className="fa fa-edit"></div>
+                </button>
+
+                <button
+                  onClick={() => {
                     setOpenPreview(true);
                     setPreviewData(profiles[index]);
                   }}
