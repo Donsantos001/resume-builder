@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import PersonalInfo, {
   userInitialState,
   UserType,
@@ -18,7 +18,7 @@ import Social, {
 } from "../components/Steps/Social";
 import SlickButton from "../components/SlickButton";
 import SlickLightButton from "../components/SlickLightButton";
-import { useAppDispatch } from "../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { addProfile } from "../redux/slices/userSlice";
 import { useNavigate } from "react-router-dom";
 import ProfilePreviewModal from "../components/Modal/ProfilePreviewModal";
@@ -44,10 +44,23 @@ const initialProfile = {
 const CreateProfile = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const { user } = useAppSelector((store) => store.user);
   const [showValid, setShowValid] = useState(false);
   const [openPreview, setOpenPreview] = useState(false);
   const [step, setStep] = useState(0);
   const [profile, setProfile] = useState<UserProfile>(initialProfile);
+
+  useEffect(() => {
+    if (user) {
+      setProfile({
+        ...profile,
+        user: {
+          ...profile.user,
+          ...user,
+        },
+      });
+    }
+  }, [user]);
 
   const handleInvalid = () => {
     enqueueSnackbar("Fields required", { variant: "warning" });
