@@ -11,13 +11,13 @@ export const skillInitialState = {
 
 const Skill = ({
   data: skills,
+  showValid = false,
   setData,
 }: {
   data: SkillType[];
+  showValid?: boolean;
   setData: any;
 }) => {
-  const [showValid, setShowValid] = useState(false);
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, i: number) => {
     setData(
       "skills",

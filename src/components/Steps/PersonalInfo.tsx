@@ -26,12 +26,13 @@ export const userInitialState = {
 
 const PersonalInfo = ({
   data: user,
+  showValid = false, 
   setData,
 }: {
   data: UserType;
+  showValid?: boolean;
   setData: any;
 }) => {
-  const [showValid, setShowValid] = useState(false);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -177,7 +178,7 @@ const PersonalInfo = ({
 
               <div className="flex flex-wrap justify-between gap-3">
                 <FormTextArea
-                  className={showValid && !user.bio ? "border-red-400" : ""}
+                  // className={showValid && !user.bio ? "border-red-400" : ""}
                   name="bio"
                   placeholder="Experienced Software Developer with X years in React, Javascript,and Typescript. Passionate about integrating embedded systems with machine learning. Seeking to innovate and create impactful technology solutions"
                   value={user.bio}

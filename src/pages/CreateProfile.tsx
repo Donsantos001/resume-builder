@@ -44,9 +44,71 @@ const initialProfile = {
 const CreateProfile = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const [showValid, setShowValid] = useState(false);
   const [openPreview, setOpenPreview] = useState(false);
   const [step, setStep] = useState(0);
   const [profile, setProfile] = useState<UserProfile>(initialProfile);
+
+  const handleInvalid = () => {
+    enqueueSnackbar("Fields required", { variant: "warning" });
+    setShowValid(true);
+    setTimeout(() => {
+      setShowValid(false);
+    }, 2000);
+    return false;
+  };
+
+  const validStep = () => {
+    switch (step) {
+      case 0:
+        if (
+          !(
+            profile.user.firstname &&
+            profile.user.lastname &&
+            profile.user.email &&
+            profile.user.phoneno &&
+            profile.user.address
+          )
+        )
+          return handleInvalid();
+        break;
+      case 1:
+        if (profile.educations.length === 0) return handleInvalid();
+        for (let edu of profile.educations) {
+          for (let k of Object.keys(edu)) {
+            if (!edu[k as keyof EducationType]) return handleInvalid();
+          }
+        }
+        break;
+      case 2:
+        if (profile.skills.length === 0) return handleInvalid();
+        for (let skill of profile.skills) {
+          for (let k of Object.keys(skill)) {
+            if (!skill[k as keyof SkillType]) return handleInvalid();
+          }
+        }
+        break;
+      case 3:
+        if (profile.projects.length === 0) return handleInvalid();
+        for (let project of profile.projects) {
+          for (let k of Object.keys(project)) {
+            if (!project[k as keyof ProjectType]) return handleInvalid();
+          }
+        }
+        break;
+      case 4:
+        if (profile.socials.length === 0) return handleInvalid();
+        for (let social of profile.socials) {
+          for (let k of Object.keys(social)) {
+            if (!social[k as keyof SocialType]) return handleInvalid();
+          }
+        }
+        break;
+      default:
+        break;
+    }
+    return true;
+  };
 
   const setData = (
     name: keyof UserProfile,
@@ -76,26 +138,56 @@ const CreateProfile = () => {
     return [
       {
         title: "Personal Info",
-        page: <PersonalInfo data={profile.user} setData={setData} />,
+        page: (
+          <PersonalInfo
+            data={profile.user}
+            setData={setData}
+            showValid={showValid}
+          />
+        ),
       },
       {
         title: "Education",
-        page: <Education data={profile.educations} setData={setData} />,
+        page: (
+          <Education
+            data={profile.educations}
+            setData={setData}
+            showValid={showValid}
+          />
+        ),
       },
       {
         title: "Skill",
-        page: <Skill data={profile.skills} setData={setData} />,
+        page: (
+          <Skill
+            data={profile.skills}
+            setData={setData}
+            showValid={showValid}
+          />
+        ),
       },
       {
         title: "Projects/Experience",
-        page: <Project data={profile.projects} setData={setData} />,
+        page: (
+          <Project
+            data={profile.projects}
+            setData={setData}
+            showValid={showValid}
+          />
+        ),
       },
       {
         title: "Socials",
-        page: <Social data={profile.socials} setData={setData} />,
+        page: (
+          <Social
+            data={profile.socials}
+            setData={setData}
+            showValid={showValid}
+          />
+        ),
       },
     ];
-  }, [profile]);
+  }, [profile, showValid]);
 
   return (
     <div>
@@ -105,7 +197,14 @@ const CreateProfile = () => {
         </div>
         <div className="flex flex-row gap-2">
           {stepPage.map((_, id) => (
-            <button key={id} onClick={() => setStep(id)} className="">
+            <button
+              key={id}
+              onClick={() => {
+                if (step < id && !validStep()) return;
+                setStep(id);
+              }}
+              className=""
+            >
               <div
                 className={`rounded-full w-[30px] h-[30px] flex justify-center items-center text-white ${
                   step === id ? "bg-gray-800" : "bg-gray-500"
@@ -134,6 +233,7 @@ const CreateProfile = () => {
           )}
           <SlickButton
             onClick={() => {
+              if (!validStep()) return;
               if (step === stepPage.length - 1) {
                 handleSave();
               }

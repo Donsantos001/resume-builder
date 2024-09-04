@@ -34,9 +34,11 @@ const DefaultTemplate = ({ profile }: { profile: UserProfile }) => {
           <p>Phone Number: {profile.user.phoneno}</p>
         </div>
 
-        <div className="bio mb-4">
-          <p className="">{profile.user.bio}</p>
-        </div>
+        {profile.user.bio && (
+          <div className="bio mb-4">
+            <p className="">{profile.user.bio}</p>
+          </div>
+        )}
 
         <div className="education mb-4">
           <h3 className="text-2xl">Education</h3>

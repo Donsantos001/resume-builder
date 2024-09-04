@@ -12,12 +12,12 @@ export const socialInitialState = {
 const Social = ({
   data: socials,
   setData,
+  showValid = false,
 }: {
   data: SocialType[];
+  showValid?: boolean;
   setData: any;
 }) => {
-  const [showValid, setShowValid] = useState(false);
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, i: number) => {
     setData(
       "socials",

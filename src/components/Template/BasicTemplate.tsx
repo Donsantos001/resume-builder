@@ -6,8 +6,12 @@ const BasicTemplate = ({ profile }: { profile: UserProfile }) => {
     <div className="px-4">
       <div className="flex justify-between mb-4">
         <div className="personal">
-          <h2 className="text-5xl font-medium pt-4 uppercase">{profile.user.firstname}</h2>
-          <h2 className="text-5xl font-medium uppercase">{profile.user.lastname}</h2>
+          <h2 className="text-5xl font-medium pt-4 uppercase">
+            {profile.user.firstname}
+          </h2>
+          <h2 className="text-5xl font-medium uppercase">
+            {profile.user.lastname}
+          </h2>
 
           <p>Address: {profile.user.address}</p>
           <p>Phone Number: {profile.user.phoneno}</p>
@@ -33,7 +37,11 @@ const BasicTemplate = ({ profile }: { profile: UserProfile }) => {
               <div key={index} className="mt-2 flex items-center gap-1">
                 <div className="fa fa-link text-sm"></div>
 
-                <a href={social.link} className="text-blue-800 text-sm" style={{ wordWrap: "break-word" }}>
+                <a
+                  href={social.link}
+                  className="text-blue-800 text-sm"
+                  style={{ wordWrap: "break-word" }}
+                >
                   {social.link}
                 </a>
               </div>
@@ -51,12 +59,21 @@ const BasicTemplate = ({ profile }: { profile: UserProfile }) => {
               </div>
             ))}
           </div>
-          
         </div>
 
         <div className="w-[1px] bg-gray-300 h-full"></div>
 
         <div className="flex flex-col">
+          {profile.user.bio && (
+            <>
+              <div className="bio mb-4 pt-4">
+                <p className="mt-1">{profile.user.bio}</p>
+              </div>
+
+              <hr />
+            </>
+          )}
+
           <div className="education mb-4 pt-4">
             <h3 className="text-2xl uppercase">Education</h3>
 

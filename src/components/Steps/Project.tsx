@@ -20,13 +20,13 @@ export const projectInitialState = {
 
 const Project = ({
   data: projects,
+  showValid = false,
   setData,
 }: {
   data: ProjectType[];
+  showValid?: boolean;
   setData: any;
 }) => {
-  const [showValid, setShowValid] = useState(false);
-
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     i: number
@@ -123,7 +123,7 @@ const Project = ({
                     <FormInput
                       className={
                         showValid && !project.startdate
-                          ? "border-red-400"
+                          ? "border-red-400 min-w-[90px]"
                           : "min-w-[90px]"
                       }
                       name="startdate"
@@ -150,7 +150,7 @@ const Project = ({
                     <FormInput
                       className={
                         showValid && !project.enddate
-                          ? "border-red-400"
+                          ? "border-red-400 min-w-[90px]"
                           : "min-w-[90px]"
                       }
                       name="enddate"

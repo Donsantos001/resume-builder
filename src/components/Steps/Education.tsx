@@ -19,13 +19,13 @@ export const educationInitialState = {
 
 const Education = ({
   data: educations,
+  showValid = false,
   setData,
 }: {
   data: EducationType[];
+  showValid?: boolean;
   setData: any;
 }) => {
-  const [showValid, setShowValid] = useState(false);
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, i: number) => {
     setData(
       "educations",
@@ -119,7 +119,7 @@ const Education = ({
                     <FormInput
                       className={
                         showValid && !education.startdate
-                          ? "border-red-400"
+                          ? "border-red-400 min-w-[90px]"
                           : "min-w-[90px]"
                       }
                       name="startdate"
@@ -146,7 +146,7 @@ const Education = ({
                     <FormInput
                       className={
                         showValid && !education.enddate
-                          ? "border-red-400"
+                          ? "border-red-400 min-w-[90px]"
                           : "min-w-[90px]"
                       }
                       name="enddate"
