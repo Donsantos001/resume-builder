@@ -30,12 +30,12 @@ const ProfilePreviewModal = ({
     const elem = document.getElementById("preview");
     elem &&
       html2canvas(elem).then((canvas) => {
-        const imgData = canvas.toDataURL("image/png");
+        const imgData = canvas.toDataURL("image/jpg");
         const pdf = new jsPDF();
         const imgProps = pdf.getImageProperties(imgData);
         const pdfWidth = pdf.internal.pageSize.getWidth();
         const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-        pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+        pdf.addImage(imgData, "JPG", 0, 0, pdfWidth, pdfHeight);
         pdf.save(
           `${profile?.user.firstname || ""}-${
             profile?.user.lastname || ""
@@ -50,7 +50,6 @@ const ProfilePreviewModal = ({
 
   useClickOutside(modalRef, () => close());
 
- 
   useEffect(() => {
     if (print && previewRef.current && loaded) {
       handleDownload();
@@ -69,7 +68,10 @@ const ProfilePreviewModal = ({
         open ? "z-50 " : "opacity-0 -z-10 "
       }fixed left-0 top-0 w-screen h-screen bg-[#00000044] px-5 py-6 overflow-y-auto`}
     >
-      <div ref={modalRef} className="w-full min-w-[900px] max-w-[1024px] mx-auto">
+      <div
+        ref={modalRef}
+        className="w-full min-w-[900px] max-w-[1024px] mx-auto"
+      >
         <div className="flex justify-between items-center gap-2 mb-2">
           <button
             onClick={close}
