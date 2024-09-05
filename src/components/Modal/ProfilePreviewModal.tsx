@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { UserProfile } from "../../pages/CreateProfile";
 import SlickButton from "../SlickButton";
 import { jsPDF } from "jspdf";
@@ -22,6 +22,7 @@ const ProfilePreviewModal = ({
   data?: UserProfile;
 }) => {
   const { template } = useAppSelector((store) => store.user);
+  const [loaded, setLoaded] = useState(false);
   const previewRef = useRef<any>(null);
   const modalRef = useRef<any>(null);
 
@@ -49,12 +50,14 @@ const ProfilePreviewModal = ({
 
   useClickOutside(modalRef, () => close());
 
+ 
   useEffect(() => {
-    if (print && previewRef.current) {
+    if (print && previewRef.current && loaded) {
       handleDownload();
       setPrint && setPrint(false);
+      setLoaded(false);
     }
-  }, [print, previewRef.current]);
+  }, [print, previewRef.current, loaded]);
 
   const Template = useMemo(() => {
     return templates[template].component;
@@ -63,10 +66,10 @@ const ProfilePreviewModal = ({
   return profile ? (
     <div
       className={`${
-        open ? " " : "opacity-0 -z-10 "
-      }fixed left-0 top-0 z-50 w-screen h-screen bg-[#00000044] px-5 py-6 overflow-y-auto`}
+        open ? "z-50 " : "opacity-0 -z-10 "
+      }fixed left-0 top-0 w-screen h-screen bg-[#00000044] px-5 py-6 overflow-y-auto`}
     >
-      <div ref={modalRef} className="w-full max-w-[1024px] mx-auto">
+      <div ref={modalRef} className="w-full min-w-[900px] max-w-[1024px] mx-auto">
         <div className="flex justify-between items-center gap-2 mb-2">
           <button
             onClick={close}
@@ -91,7 +94,7 @@ const ProfilePreviewModal = ({
         </div>
 
         <div ref={previewRef} id="preview" className="p-4 bg-white">
-          <Template profile={profile} />
+          <Template setLoaded={setLoaded} profile={profile} />
         </div>
       </div>
     </div>

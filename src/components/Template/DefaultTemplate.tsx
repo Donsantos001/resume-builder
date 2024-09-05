@@ -2,12 +2,19 @@ import { UserProfile } from "../../pages/CreateProfile";
 import Image from "../../asset/imgs/res-builder.png";
 import ImageWithFallback from "../ImageWithFallback";
 
-const DefaultTemplate = ({ profile }: { profile: UserProfile }) => {
+const DefaultTemplate = ({
+  profile,
+  setLoaded,
+}: {
+  profile: UserProfile;
+  setLoaded?: any;
+}) => {
   return (
     <div className="grid grid-cols-[30%,_70%] gap-3">
       <div className="flex flex-col">
         <div className="w-full p-4">
           <ImageWithFallback
+            setLoaded={setLoaded}
             alt={"Profile picture"}
             primaryUrl={profile.user.image}
             fallbackUrl={Image}

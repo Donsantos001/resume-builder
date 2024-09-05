@@ -2,7 +2,13 @@ import { UserProfile } from "../../pages/CreateProfile";
 import Image from "../../asset/imgs/res-builder.png";
 import ImageWithFallback from "../ImageWithFallback";
 
-const BasicTemplate = ({ profile }: { profile: UserProfile }) => {
+const BasicTemplate = ({
+  profile,
+  setLoaded,
+}: {
+  profile: UserProfile;
+  setLoaded?: any;
+}) => {
   return (
     <div className="px-4">
       <div className="flex justify-between mb-4">
@@ -20,6 +26,7 @@ const BasicTemplate = ({ profile }: { profile: UserProfile }) => {
 
         <div className="h-[160px]">
           <ImageWithFallback
+            setLoaded={setLoaded}
             alt={"Profile picture"}
             primaryUrl={profile.user.image}
             fallbackUrl={Image}

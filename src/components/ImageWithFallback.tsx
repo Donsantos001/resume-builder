@@ -4,6 +4,7 @@ const ImageWithFallback = ({
   primaryUrl,
   fallbackUrl,
   alt,
+  setLoaded,
   ...rest
 }: {
   [key: string]: any;
@@ -24,7 +25,17 @@ const ImageWithFallback = ({
     img.src = primaryUrl;
   }, [primaryUrl, fallbackUrl]);
 
-  return <img {...rest} src={src} alt={alt} />;
+  return (
+    <img
+      {...rest}
+      src={src}
+      onLoad={() => {
+        console.log("loaded n")
+        setLoaded && setLoaded(true);
+      }}
+      alt={alt}
+    />
+  );
 };
 
 export default ImageWithFallback;

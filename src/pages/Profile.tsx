@@ -75,6 +75,10 @@ const Profile = () => {
                 <button
                   onClick={() => {
                     setPrint(true);
+                    // setOpenPreview(true);
+                    // setTimeout(() => {
+                    //   setOpenPreview(false);
+                    // }, 2000)
                     setPreviewData(profiles[index]);
                   }}
                 >
